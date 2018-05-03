@@ -26,16 +26,10 @@ public class RecetaController {
 	@Autowired
 	RecetaService dao;
 	
-	@Autowired
-	RecetaIngredientesService daoRI;
-	
 	public void setRecetaService(RecetaService dao) {
 		this.dao=dao;
 	}
 	
-	public void setRecetaIngredientesService(RecetaIngredientesService daoRI) {
-		this.daoRI=daoRI;
-	}
 	@RequestMapping(value="/api/recetas/{id}", method=RequestMethod.GET)
 	@ResponseBody
 	public Receta obtenerRecetaId(@PathVariable int id){
@@ -50,19 +44,11 @@ public class RecetaController {
 	
 	@RequestMapping(value="/api/recetas",method=RequestMethod.POST)
 	@ResponseBody
-	public void insertaReceta(@RequestBody Receta receta,HttpServletRequest request) {
-		
-		System.out.println(receta.toString());
-		/*for(RecetaIngredientes r:receta.getRecetaIngredientes() ) {
-			RecetaIngredientes rI = new RecetaIngredientes();
-			//rI.setReceta(r.getReceta());
-			rI.setCantidad(r.getCantidad());
-			rI.setIngrediente(r.getIngrediente());
-			daoRI.save(rI);
-			
-		}*/
+	public int insertaReceta(@RequestBody Receta receta,HttpServletRequest request) {
 		
 		dao.save(receta);
+		System.out.println("idd "+receta.getId());
+		return receta.getId();
 		//request.getParameter(arg0)
 		//System.out.println(recetaIngredientes.getIngrediente()+" "+recetaIngredientes.getReceta() );
 	}

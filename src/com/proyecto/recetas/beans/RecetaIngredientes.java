@@ -1,22 +1,10 @@
 package com.proyecto.recetas.beans;
 
 
-import javax.persistence.AssociationOverride;
-import javax.persistence.AssociationOverrides;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.persistence.Transient;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="RECETA_INGREDIENTES")
@@ -26,22 +14,13 @@ public class RecetaIngredientes implements java.io.Serializable {
 	
 	@Id
 	@Column(name="ID_RECETA")
-	@GeneratedValue(strategy=GenerationType.AUTO, generator="seq_bd_recetas")
-	@SequenceGenerator(name = "seq_bd_recetas", sequenceName = "seq_bd_recetas", allocationSize = 1, initialValue = 1)
-	private int idReceta;
+	private int receta;
 	
-
-	@ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "ingrediente_id") 
-	private	Ingrediente ingrediente;
-	
+	@Id
+	@Column(name="ID_INGREDIENTE")
+	private int ingrediente;
 
 	private int cantidad;
-	
-	@Transient
-	@ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_receta") 
-	private Receta receta;
 	
 	public RecetaIngredientes() {
 	}
@@ -54,20 +33,20 @@ public class RecetaIngredientes implements java.io.Serializable {
 	}
 	
 
-    public Receta getReceta() {
+    public int getReceta() {
         return receta;
     }
 	
-	public void setReceta(Receta receta) {
+	public void setReceta(int receta) {
 		this.receta=receta;
 	}
 	
  
-    public Ingrediente getIngrediente() {
+    public int getIngrediente() {
         return ingrediente;
     }
 	
-	public void setIngrediente(Ingrediente ingrediente) {
+	public void setIngrediente(int ingrediente) {
 		this.ingrediente=ingrediente;
 	}
 }

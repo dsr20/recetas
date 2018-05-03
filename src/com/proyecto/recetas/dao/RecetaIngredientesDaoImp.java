@@ -1,5 +1,6 @@
 package com.proyecto.recetas.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -29,9 +30,12 @@ public class RecetaIngredientesDaoImp implements RecetaIngredientesDao{
 	}
 	
 	@Override
-	public void save( RecetaIngredientes r) {
+	public void save(List<RecetaIngredientes> r) {
 		Session session = this.sessionFactory.getCurrentSession();
-		session.persist(r);
+		for(RecetaIngredientes rI:r) {
+			session.persist(rI);
+		}
+		
 		/*if(!r.getRecetaIngredientes().isEmpty()) {
 			for(RecetaIngredientes rI : r.getRecetaIngredientes()) {
 				session.persist(rI);
